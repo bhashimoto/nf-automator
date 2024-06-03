@@ -7,8 +7,13 @@ from googleapiclient.discovery import HttpError, build
 
 def load_spreadheet_id() -> str:
     spreadsheet_id: str = ''
-    with open('info.txt', 'r') as file:
-        spreadsheet_id = file.read()
+    if os.path.exists('info.txt'):
+        with open('info.txt', 'r') as file:
+            spreadsheet_id = file.read()
+    else:
+        spreadsheet_id = input('enter spreadsheet id: ')
+        with open('info.txt', 'w') as file:
+            file.write(spreadsheet_id)
     return spreadsheet_id
 
 def setup_credentials():
