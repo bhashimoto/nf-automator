@@ -6,9 +6,12 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
 
-driver = webdriver.Chrome()
-wait = WebDriverWait(driver, 10)
+def config_driver():
+    driver = webdriver.Chrome()
+    wait = WebDriverWait(driver, 10)
+    return driver, wait
 
+    
 def element_exists(by, value):
     try:
         element = driver.find_element(by, value)
@@ -24,7 +27,7 @@ def convert_block_to_date(block):
     date = f"{date_parts[2]}-{date_parts[1]}-{date_parts[0]}"
     return date
 
-def download_data(url: str):
+def download_data(url: str, driver, wait):
     print("accessing URL")
     driver.get(url)
     wait.until(EC.visibility_of_element_located((By.ID, 'tabResult')))
@@ -53,8 +56,9 @@ def download_data(url: str):
 
 
 def retrieve_data(url):
+    driver, wait = config_driver()
     print(f"Downloading data from {url}")
-    items = download_data(url)
+    items = download_data(url, driver, wait)
     print(f"retrieved data: {items}")
     return items
 

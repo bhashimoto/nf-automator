@@ -4,8 +4,12 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import HttpError, build
 
-spreadsheet_id = '1lFRh-nVBFLvlYA-LjF9p-3V3SVrL-IKlsa_4mxKuE18'
 
+def load_spreadheet_id() -> str:
+    spreadsheet_id: str = ''
+    with open('info.txt', 'r') as file:
+        spreadsheet_id = file.read()
+    return spreadsheet_id
 
 def setup_credentials():
     SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -41,7 +45,7 @@ def format_data(data):
 
 def append_data(sheet, values):
     try:
-
+        spreadsheet_id = load_spreadheet_id()
         body = {"values": values}
         result = (
             sheet.values()
