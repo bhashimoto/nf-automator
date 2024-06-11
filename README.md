@@ -1,6 +1,11 @@
 # nf-automator
 Automation for importing invoice data and integrating with google sheets
 
+## Scope
+This project is limited to invoices from Rio de Janeiro, with no guarantee that it will work with other types of invoices.
+Feel free to fork it and adapt it to your use case.
+
+
 ## Requirements
 To run this application, you will need the following components:
 - [Python](https://www.python.org)
@@ -29,7 +34,7 @@ and rename it to **credentials.json**.
 
 
 ## Instructions
-run the main.sh file
+Run the main.sh file
 > ./main.sh [URL for invoice]
 
 If no url is provided, user will be prompted for one.
@@ -38,6 +43,6 @@ After scraping the invoice data, if there are no valid credentials, you will be 
 log in and give necessary confirmations.
 
 If there is no previously registered sheet, you will be prompted to provide a Google Sheets ID, which can be located at the sheet url:
-> https://docs.google.com/spreadsheets/d/**[spreadsheet_id]**/edit
+> https://docs.google.com/spreadsheets/d/ **[spreadsheet_id]** /edit
 
 The items will be loaded into the first three columns of the first sheet, starting at the first available row.
