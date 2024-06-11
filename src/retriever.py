@@ -12,7 +12,7 @@ def config_driver():
     return driver, wait
 
     
-def element_exists(by, value):
+def element_exists(driver, by, value):
     try:
         element = driver.find_element(by, value)
     except NoSuchElementException:
@@ -41,7 +41,7 @@ def download_data(url: str, driver, wait):
     keep_running = True
     
     while keep_running:
-        element = element_exists(By.ID, f"Item + {curr_row}")
+        element = element_exists(driver, By.ID, f"Item + {curr_row}")
         if element is None:
             keep_running = False
         else:
